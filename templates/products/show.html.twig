@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ product.name }} - Agency{% endblock %}
+
+{% block content %}
+<br/>
+ <div class="row">
+    <div class="col-md-4">
+        <img src="/uploads/{{ product.image }}" alt="{{ product.name }}" class="img-fluid">
+    </div>
+    <div class="col-md-7 my-auto">
+    <br/>
+        <h5>{{ product.name }}</h5>
+        <p>
+        {{ product.substitle }}
+        </p>
+        <p>
+        {{ product.description }}
+        </p>
+        <span class="product-page-price"> {{ (product.price / 100) | number_format(2, ',', '.') }} €</span>
+        <hr>
+            <div>
+                <div id="contactForm"class="mt-4">Prendre RDV avec un agent</div>
+                <br/>
+                {{ form_start(form, {'action': path('products'), 'method': 'POST'}) }} 
+                <div class="row">
+                <div class="col">{{ form_row(form.firstname) }}</div>
+                <div class="col">{{ form_row(form.lastname) }}</div>
+                </div>
+                <div class="row">
+                <div class="col">{{ form_row(form.phone) }}</div>
+                <div class="col">{{ form_row(form.email) }}</div>
+                </div>
+                <div class="row">
+                <div class="col">{{ form_row(form.date)}}</div>
+                </div>
+                 <div class="row">
+                <div class="col">{{ form_row(form.product, {"value": product.id})}}</div>
+                </div>
+                <br/>
+                {{ form_rest(form)}}
+                <input type="submit" class="btn btn-primary" value="Envoyer"/>
+                {#<div class="form-group">
+                <button class="btn btn-primary">Envoyer</button>
+                </div>#}
+                {{ form_end(form)}}
+            </div>
+        </div>
+ 
+{% endblock %}
